@@ -96,6 +96,40 @@ function displayMessage(sender, message) {
     chatMessages.appendChild(messageElement);
 }
 
+
+// Function to send a message
+function sendMessage() {
+    const userMessage = document.getElementById('user-message').value;
+
+    if (userMessage.trim() !== '') {
+        // Display user message in the chat box
+        displayMessage('user', userMessage);
+
+        // Make a direct API call to GPT-3 from the client side (not recommended)
+        fetch('https://api.openai.com/v1/engines/davinci-codex/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Replace 'YOUR_API_KEY' with your actual GPT-3 API key
+                'Authorization': 'Bearer YOUR_API_KEY'
+            },
+            body: JSON.stringify({
+                prompt: userMessage,
+                max_tokens: 100
+            })
+        })
+        .then(response => response.json())
+        .then(responseData => {
+            // Display GPT-3 response in the chat box
+            displayMessage('gpt3', responseData.choices[0].text);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle errors gracefully
+        });
+    }
+}
+
 // Check if the user is already signed in on page load
 window.onload = function () {
     const username = localStorage.getItem('username');
