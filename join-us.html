@@ -1,3 +1,4 @@
+<!-- join-us.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Us</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -13,23 +13,22 @@
     </header>
     
     <section>
-        <h2>Join Us</h2>
-        <p>Fill out the form below to join us:</p>
-        
-        <form id="join-us-form">
+        <h2>Sign Up to Join Us</h2>
+        <form id="joinUsForm">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
-            
+
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
-            
-            <button type="button" onclick="submitJoinUsForm()">Submit</button>
+
+            <button type="button" onclick="submitJoinUsForm()">Sign Up</button>
         </form>
     </section>
 
     <footer>
         <p>&copy; 2023 Client Website</p>
-        <button onclick="goBack()">Go Back to Homepage</button>
     </footer>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
