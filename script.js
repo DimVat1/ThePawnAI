@@ -71,22 +71,6 @@ function goBack() {
     window.location.href = 'index.html';
 }
 
-// Function to send a message
-function sendMessage() {
-    const userMessage = document.getElementById('user-message').value;
-    
-    if (userMessage.trim() !== '') {
-        // Display user message in the chat box
-        displayMessage('user', userMessage);
-
-        // Simulate a response from ChatGPT (replace with actual API call)
-        const chatGPTResponse = 'This is a response from ThePawnAI.';
-
-        // Display ChatGPT response in the chat box
-        displayMessage('chatgpt', chatGPTResponse);
-    }
-}
-
 // Function to display messages in the chat box
 function displayMessage(sender, message) {
     const chatMessages = document.getElementById('chat-messages');
