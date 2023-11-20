@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chatbot</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="logo.png">
+    <title>Client Website</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="chat-container">
-            <div class="chat-box" id="chat-box"></div>
-            <div class="chat-input">
-                <input type="text" id="user-input" placeholder="Type a message...">
-                <button id="send-button">➡️</button>
-                <button id="google-mode-button">🌐</button>
-                <button id="voice-button">🎙️</button>
-                <button id="generate-image-button">🖼️</button>
-                <button id="android-button">📱 Download Android App</button>
-            </div>
-        </div>
-    </div>
+    <header>
+        <h1>ThePawnAI</h1>
+    </header>
     
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+    <section id="signin-section">
+        <h2>Sign In</h2>
+        <form id="signin-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="button" onclick="signIn()">Sign In</button>
+        </form>
+    </section>
+
+    <section id="homepage-section" style="display: none;">
+        <h2>Homepage</h2>
+        <p>Welcome to the homepage!</p>
+    </section>
+
+    <footer>
+        <p>&copy; 
