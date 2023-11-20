@@ -5,9 +5,7 @@ function signIn() {
 
     if (username.trim() !== '' && password.trim() !== '') {
         saveUserInfo(username);
-        document.getElementById('signin-section').style.display = 'none';
-        document.getElementById('homepage-section').style.display = 'block';
-        document.getElementById('username-display').innerText = username;
+        showHomepage(username);
     } else {
         alert('Please enter a valid username and password.');
     }
@@ -18,30 +16,35 @@ function saveUserInfo(username) {
     localStorage.setItem('username', username);
 }
 
+// Function to show the homepage after signing in
+function showHomepage(username) {
+    document.getElementById('signin-section').style.display = 'none';
+    document.getElementById('homepage-section').style.display = 'block';
+    document.getElementById('username-display').innerText = username;
+}
+
 // Function to simulate interacting with a virtual agent or a human
 function interact(interactionType) {
     const username = localStorage.getItem('username');
-    const resultElement = document.getElementById('interaction-result');
-    
-    if (username) {
-        let message = '';
 
+    if (username) {
         if (interactionType === 'virtual') {
             // Redirect to the virtual agent page
             window.location.href = 'virtual-agent.html';
-            return;
         } else if (interactionType === 'human') {
             // Redirect to the human volunteers page
             window.location.href = 'human-volunteers.html';
-            return;
         }
-
-        resultElement.innerHTML = `<p>${message}</p>`;
     } else {
-        document.getElementById('signin-section').style.display = 'block';
-        document.getElementById('homepage-section').style.display = 'none';
+        showSignIn();
         alert('Please sign in first.');
     }
+}
+
+// Function to show the sign-in section
+function showSignIn() {
+    document.getElementById('signin-section').style.display = 'block';
+    document.getElementById('homepage-section').style.display = 'none';
 }
 
 // Function to navigate to the Join Us page
@@ -76,12 +79,11 @@ function displayMessage(sender, message) {
     const chatMessages = document.getElementById('chat-messages');
     const messageElement = document.createElement('div');
     messageElement.className = sender === 'user' ? 'user-message' : 'chatgpt-message';
-    messageElement.textContent = message;
+    messageElement.innerHTML = message;
     chatMessages.appendChild(messageElement);
 }
 
-
-// Function to send a message
+// Function to send a message to the virtual agent
 function sendMessage() {
     const userMessage = document.getElementById('user-message').value;
 
@@ -89,37 +91,44 @@ function sendMessage() {
         // Display user message in the chat box
         displayMessage('user', userMessage);
 
-        // Make a direct API call to GPT-3 from the client side (not recommended)
-        fetch('https://api.openai.com/v1/engines/davinci-codex/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // Replace 'YOUR_API_KEY' with your actual GPT-3 API key
-                'Authorization': 'Bearer YOUR_API_KEY'
-            },
-            body: JSON.stringify({
-                prompt: userMessage,
-                max_tokens: 100
-            })
-        })
-        .then(response => response.json())
-        .then(responseData => {
-            // Display GPT-3 response in the chat box
-            displayMessage('gpt3', responseData.choices[0].text);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Handle errors gracefully
-        });
+        // Fetch answers from Google
+        fetchAnswersFromGoogle(userMessage);
     }
+}
+
+// Function to fetch answers from Google
+function fetchAnswersFromGoogle(query) {
+    const googleApiKey = 'AIzaSyDPVqP6l-NdTAJ1Zg5oKFiLORz-M5tDZvE';
+    const googleEngineId = 'e66093057c55d4a1d';
+
+    axios.get(`https://www.googleapis.com/customsearch/v1?key=${googleApiKey}&cx=${googleEngineId}&q=${query}`)
+        .then((response) => {
+            const searchResults = response.data.items;
+
+            if (searchResults && searchResults.length > 0) {
+                const topResult = searchResults[0];
+                const title = topResult.title;
+                const snippet = topResult.snippet;
+                const link = topResult.link;
+
+                const googleResponse = `<p>AI Chatbot: ${title}. Here's a snippet: ${snippet}<br><a href="${link}" target="_blank">Read more</a></p>`;
+                displayMessage("AI Chatbot", googleResponse);
+            } else {
+                const noResultsResponse = "<p>AI Chatbot: I couldn't find any relevant results.</p>";
+                displayMessage("AI Chatbot", noResultsResponse);
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching Google results:", error);
+            const errorMessage = "<p>AI Chatbot: Sorry, I encountered an error while fetching results from Google.</p>";
+            displayMessage("AI Chatbot", errorMessage);
+        });
 }
 
 // Check if the user is already signed in on page load
 window.onload = function () {
     const username = localStorage.getItem('username');
     if (username) {
-        document.getElementById('signin-section').style.display = 'none';
-        document.getElementById('homepage-section').style.display = 'block';
-        document.getElementById('username-display').innerText = username;
+        showHomepage(username);
     }
 };
