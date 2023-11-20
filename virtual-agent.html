@@ -5,28 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Agent</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
         <h1>Virtual Agent Page</h1>
     </header>
     
-    <section>
-        <h2>Welcome to the Virtual Agent!</h2>
-        <p>This page is for interactions with the virtual agent.</p>
-        
-        <!-- Go Back Button -->
-        <button onclick="goBack()">Go Back to Homepage</button>
+    <section id="chat-section">
+        <div id="chat-box">
+            <div id="chat-messages"></div>
+            <div id="user-input">
+                <input type="text" id="user-message" placeholder="Type your message">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
     </section>
 
     <footer>
         <p>&copy; 2023 Client Website</p>
+        <button onclick="goBack()">Go Back to Homepage</button>
     </footer>
-
-<script>// Function to go back to the homepage
-function goBack() {
-    window.location.href = 'index.html';
-}</script> 
-
 </body>
 </html>
