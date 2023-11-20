@@ -49,7 +49,7 @@ function joinUs() {
     window.location.href = 'join-us.html';
 }
 
-// Function to submit the Join Us form (demo - sends an alert)
+// Function to submit the Join Us form and redirect to Volunteer page
 function submitJoinUsForm() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
@@ -58,6 +58,9 @@ function submitJoinUsForm() {
         // In a real application, you would send this data to a server for processing
         // For demonstration, we'll just show an alert
         alert(`Join Us Form Submitted:\nName: ${name}\nEmail: ${email}`);
+
+        // Redirect to the Volunteer page
+        window.location.href = 'volunteer.html';
     } else {
         alert('Please fill out all fields.');
     }
