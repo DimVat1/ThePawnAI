@@ -33,16 +33,17 @@ footer {
 }
 
 #signin-section button {
-    background-color: #4caf50;
+    background-color: #007BFF; /* Blue */
     color: white;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 #signin-section button:hover {
-    background-color: #45a049;
+    background-color: #FFD700; /* Yellow on hover */
 }
 
 /* Homepage Section Styling */
@@ -53,4 +54,42 @@ footer {
 #homepage-section p {
     font-size: 18px;
     color: #333;
+}
+
+/* Apply specific styles to the Human Volunteers page */
+body.page-human-volunteers {
+    background-color: #f0f0f0;
+}
+
+body.page-human-volunteers button {
+    background-color: #007BFF; /* Blue */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+body.page-human-volunteers button:hover {
+    background-color: #FFD700; /* Yellow on hover */
+}
+
+/* Apply specific styles to the Volunteer page */
+body.page-volunteer {
+    background-color: #ffecd9;
+}
+
+body.page-volunteer button {
+    background-color: #007BFF; /* Blue */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+body.page-volunteer button:hover {
+    background-color: #FFD700; /* Yellow on hover */
 }
