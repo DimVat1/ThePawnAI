@@ -63,6 +63,11 @@ function submitJoinUsForm() {
     }
 }
 
+// Function to go back to the homepage
+function goBack() {
+    window.location.href = 'index.html';
+}
+
 // Check if the user is already signed in on page load
 window.onload = function () {
     const username = localStorage.getItem('username');
