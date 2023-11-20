@@ -125,6 +125,32 @@ function fetchAnswersFromGoogle(query) {
         });
 }
 
+// Function to submit the Join Us form and save emails to a file
+function submitJoinUsForm() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+
+    if (name.trim() !== '' && email.trim() !== '') {
+        // Save email to a file
+        saveEmailToFile(name, email);
+
+        // Redirect to the Volunteer page
+        window.location.href = 'volunteers.html';
+    } else {
+        alert('Please fill out all fields.');
+    }
+}
+
+// Function to save email to a file
+function saveEmailToFile(name, email) {
+    const data = `Name: ${name}, Email: ${email}\n`;
+
+    // Using FileSaver.js to save the file
+    const blob = new Blob([data], { type: 'text/plain;charset=utf-8' });
+    saveAs(blob, 'emails.txt');
+}
+
+
 // Check if the user is already signed in on page load
 window.onload = function () {
     const username = localStorage.getItem('username');
