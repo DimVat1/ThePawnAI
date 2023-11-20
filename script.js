@@ -44,6 +44,25 @@ function interact(interactionType) {
     }
 }
 
+// Function to navigate to the Join Us page
+function joinUs() {
+    window.location.href = 'join-us.html';
+}
+
+// Function to submit the Join Us form (demo - sends an alert)
+function submitJoinUsForm() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+
+    if (name.trim() !== '' && email.trim() !== '') {
+        // In a real application, you would send this data to a server for processing
+        // For demonstration, we'll just show an alert
+        alert(`Join Us Form Submitted:\nName: ${name}\nEmail: ${email}`);
+    } else {
+        alert('Please fill out all fields.');
+    }
+}
+
 // Check if the user is already signed in on page load
 window.onload = function () {
     const username = localStorage.getItem('username');
